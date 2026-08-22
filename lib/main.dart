@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(const ImprontaDexApp());
@@ -145,86 +144,31 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
 
   String testoRicerca = '';
   String categoriaSelezionata = 'Tutti';
-  final ImagePicker _picker = ImagePicker();
 
-  Future<void> apriFotocameraODigitalizza(ImageSource sorgente) async {
-    try {
-      final XFile? fotoScattata = await _picker.pickImage(source: sorgente);
-
-      if (fotoScattata != null) {
-        if (!mounted) return;
-        
-        // Mostra popup di analisi
-        showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) => const AlertDialog(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(color: Colors.green),
-                SizedBox(height: 16),
-                Text('Analisi impronta in corso...'),
-              ],
-            ),
-          ),
-        );
-
-        // Simulazione elaborazione IA
-        await Future.delayed(const Duration(seconds: 2));
-
-        if (!mounted) return;
-        Navigator.pop(context); // Chiude il caricamento
-
-        // Mostra il risultato
-        mostraDettaglioAnimale(context, tuttiGliAnimali[0]);
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Impossibile accedere alla fotocamera.')),
-      );
-    }
-  }
-
-  void selezionaSorgenteFoto() {
-    showModalBottomSheet(
+  void mostraSimulazioneFotocamera() {
+    showDialog(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Scatta o carica foto impronta',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              ListTile(
-                leading: const Icon(Icons.camera_alt, color: Colors.orange, size: 30),
-                title: const Text('Usa Fotocamera'),
-                subtitle: const Text('Scatta una foto sul momento'),
-                onTap: () {
-                  Navigator.pop(context);
-                  apriFotocameraODigitalizza(ImageSource.camera);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.photo_library, color: Colors.green, size: 30),
-                title: const Text('Scegli dalla Galleria'),
-                subtitle: const Text('Seleziona una foto già presente'),
-                onTap: () {
-                  Navigator.pop(context);
-                  apriFotocameraODigitalizza(ImageSource.gallery);
-                },
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Row(
+          children: [
+            Icon(Icons.camera_alt, color: Colors.orange),
+            SizedBox(width: 10),
+            Text('Fotocamera Web'),
+          ],
+        ),
+        content: const Text(
+          'Scegli un animale dall\'elenco sottostante per consultare la scheda tecnica e l\'impronta ufficiale.',
+          textAlign: TextAlign.center,
+        ),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.green[800]),
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK', style: TextStyle(color: Colors.white)),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 
@@ -378,7 +322,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
-                        onPressed: selezionaSorgenteFoto,
+                        onPressed: mostraSimulazioneFotocamera,
                         child: const Text(
                           'SCATTA E RICONOSCI',
                           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
