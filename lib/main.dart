@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
 void main() {
   runApp(const ImprontaDexApp());
@@ -145,31 +147,40 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
   String testoRicerca = '';
   String categoriaSelezionata = 'Tutti';
 
-  void mostraSimulazioneFotocamera() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Row(
-          children: [
-            Icon(Icons.camera_alt, color: Colors.orange),
-            SizedBox(width: 10),
-            Text('Fotocamera Web'),
-          ],
-        ),
-        content: const Text(
-          'Scegli un animale dall\'elenco sottostante per consultare la scheda tecnica e l\'impronta ufficiale.',
-          textAlign: TextAlign.center,
-        ),
-        actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.green[800]),
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK', style: TextStyle(color: Colors.white)),
+  // Funzione che apre la fotocamera/galleria nativa del browser/smartphone
+  void scattaEAnalizzaFoto() {
+    html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
+    uploadInput.accept = 'image/*';
+    uploadInput.setAttribute('capture', 'environment'); // Apre direttamente la fotocamera posteriore su smartphone
+    uploadInput.click();
+
+    uploadInput.onChange.listen((e) {
+      final files = uploadInput.files;
+      if (files!.isNotEmpty) {
+        // Mostra il caricamento e simula l'analisi dell'impronta
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => const AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircularProgressIndicator(color: Colors.green),
+                SizedBox(height: 16),
+                Text('Analisi impronta in corso...'),
+              ],
+            ),
           ),
-        ],
-      ),
-    );
+        );
+
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!mounted) return;
+          Navigator.pop(context); // Chiude il loader
+          // Per ora mostra la scheda del Lupo come risultato dell'analisi
+          mostraDettaglioAnimale(context, tuttiGliAnimali[1]); 
+        });
+      }
+    });
   }
 
   void mostraDettaglioAnimale(BuildContext context, AnimalData animale) {
@@ -322,7 +333,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
-                        onPressed: mostraSimulazioneFotocamera,
+                        onPressed: scattaEAnalizzaFoto, // ORA APRE LA FOTOCAMERA/GALLERIA DEL DISPOSITIVO!
                         child: const Text(
                           'SCATTA E RICONOSCI',
                           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
