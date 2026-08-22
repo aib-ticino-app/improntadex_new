@@ -55,6 +55,7 @@ class SchermataPrincipale extends StatefulWidget {
 }
 
 class _SchermataPrincipaleState extends State<SchermataPrincipale> {
+  // ELENCO CON MAIUSCOLE ESATTE PER I FILE ASSETS
   final List<AnimalData> tuttiGliAnimali = [
     AnimalData(
       nome: 'Volpe Rossa',
@@ -66,7 +67,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
       curiosita: 'Sente un topo a 100 metri sotto la neve!',
       rarita: 'Comune',
       coloreRarita: Colors.green,
-      percorsoFoto: 'assets/images/volpe.jpeg',
+      percorsoFoto: 'assets/images/Volpe.jpeg',
     ),
     AnimalData(
       nome: 'Lupo Appenninico',
@@ -78,7 +79,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
       curiosita: 'I lupi camminano in fila mettendo i piedi nelle impronte del capobranco!',
       rarita: 'Raro',
       coloreRarita: Colors.red,
-      percorsoFoto: 'assets/images/lupo.jpeg',
+      percorsoFoto: 'assets/images/Lupo.jpeg',
     ),
     AnimalData(
       nome: 'Orso Bruno Marsicano',
@@ -90,7 +91,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
       curiosita: 'Va in letargo e dorme per mesi!',
       rarita: 'Rarissimo',
       coloreRarita: Colors.purple,
-      percorsoFoto: 'assets/images/orso.jpeg',
+      percorsoFoto: 'assets/images/Orso.jpeg',
     ),
     AnimalData(
       nome: 'Capriolo',
@@ -102,7 +103,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
       curiosita: 'Ha una macchia bianca sul sedere a forma di cuore!',
       rarita: 'Comune',
       coloreRarita: Colors.green,
-      percorsoFoto: 'assets/images/capriolo.jpeg',
+      percorsoFoto: 'assets/images/Capriolo.jpeg',
     ),
     AnimalData(
       nome: 'Cinghiale',
@@ -114,7 +115,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
       curiosita: 'I cuccioli sono a strisce per mimetizzarsi!',
       rarita: 'Comune',
       coloreRarita: Colors.green,
-      percorsoFoto: 'assets/images/cinghiale.jpeg',
+      percorsoFoto: 'assets/images/Cinghiale.jpeg',
     ),
     AnimalData(
       nome: 'Stambecco',
@@ -126,7 +127,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
       curiosita: 'Si arrampica su dighe verticali per leccare i sali!',
       rarita: 'Non comune',
       coloreRarita: Colors.orange,
-      percorsoFoto: 'assets/images/stambecco.jpeg',
+      percorsoFoto: 'assets/images/Stambecco.jpeg',
     ),
     AnimalData(
       nome: 'Scoiattolo Rosso',
@@ -138,7 +139,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
       curiosita: 'Dimenticando le noci fa nascere nuovi alberi!',
       rarita: 'Comune',
       coloreRarita: Colors.green,
-      percorsoFoto: 'assets/images/scoiattolo.jpeg',
+      percorsoFoto: 'assets/images/Scoiattolo.jpeg',
     ),
   ];
 
@@ -213,7 +214,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
                       color: Colors.grey[200],
                       child: Image.asset(
                         animale.percorsoFoto,
-                        fit: BoxFit.contain, // INQUADRA L'IMMAGINE INTERA AL CENTRO
+                        fit: BoxFit.contain,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                             color: Colors.green[100],
