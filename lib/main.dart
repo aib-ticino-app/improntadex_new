@@ -57,6 +57,7 @@ class SchermataPrincipale extends StatefulWidget {
 }
 
 class _SchermataPrincipaleState extends State<SchermataPrincipale> {
+  // ELENCO COMPLETO DEGLI ANIMALI (inclusi quelli della Lombardia)
   final List<AnimalData> tuttiGliAnimali = [
     AnimalData(
       nome: 'Volpe Rossa',
@@ -142,22 +143,81 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
       coloreRarita: Colors.green,
       percorsoFoto: 'assets/images/Scoiattolo.jpeg',
     ),
+    // --- NUOVI ANIMALI DELLA LOMBARDIA ---
+    AnimalData(
+      nome: 'Camoscio Alpino',
+      nomeScientifico: 'Rupicapra rupicapra',
+      categoria: 'Erbivori',
+      tipoImpronta: 'Zoccolo stretto e appuntito',
+      dettaglioImpronta: 'Piccolo (5-6 cm) con punte divaricate e suola elastica per fare presa sulle rocce.',
+      cosaMangia: 'Erbe alpine, germogli, licheni.',
+      curiosita: 'Può compiere balzi prodigiosi fino a 6 metri di lunghezza sulle pareti rocciose!',
+      rarita: 'Non comune',
+      coloreRarita: Colors.orange,
+      percorsoFoto: 'assets/images/Camoscio.jpeg',
+    ),
+    AnimalData(
+      nome: 'Cervo Nobile',
+      nomeScientifico: 'Cervus elaphus',
+      categoria: 'Erbivori',
+      tipoImpronta: 'Zoccolo largo a doppio dito',
+      dettaglioImpronta: 'Più grande del capriolo (circa 8-10 cm), con margini ben definiti.',
+      cosaMangia: 'Erba, foglie, cortecce, ghiande.',
+      curiosita: 'In autunno i maschi fanno risuonare le valli con il loro possente bramito.',
+      rarita: 'Non comune',
+      coloreRarita: Colors.orange,
+      percorsoFoto: 'assets/images/Cervo.jpeg',
+    ),
+    AnimalData(
+      nome: 'Tasso Europeo',
+      nomeScientifico: 'Meles meles',
+      categoria: 'Piccoli Mammiferi',
+      tipoImpronta: '5 dita con lunghi artigli',
+      dettaglioImpronta: 'Simile a una piccola mano con i segni evidenti dei grandi artigli da scavo.',
+      cosaMangia: 'Lombrici, radici, frutta, piccoli insetti.',
+      curiosita: 'Costruisce immense tane sotterranee (chiamate "iaie") abitate per decenni.',
+      rarita: 'Comune',
+      coloreRarita: Colors.green,
+      percorsoFoto: 'assets/images/Tasso.jpeg',
+    ),
+    AnimalData(
+      nome: 'Aquila Reale',
+      nomeScientifico: 'Aquila chrysaetos',
+      categoria: 'Predatori',
+      tipoImpronta: 'Artigli potenti (Rara a terra)',
+      dettaglioImpronta: 'Maestosi artigli adunghi, difficilmente visibili sul terreno fangoso.',
+      cosaMangia: 'Marmotte, lepri, piccoli mammiferi.',
+      curiosita: 'In picchiata può superare i 250 km/h!',
+      rarita: 'Raro',
+      coloreRarita: Colors.red,
+      percorsoFoto: 'assets/images/Aquila.jpeg',
+    ),
+    AnimalData(
+      nome: 'Lepre Comune',
+      nomeScientifico: 'Lepus europaeus',
+      categoria: 'Erbivori',
+      tipoImpronta: 'Impronte asimmetriche',
+      dettaglioImpronta: 'Zampe posteriori più lunghe che lasciano il segno davanti a quelle anteriori.',
+      cosaMangia: 'Erba, germogli, corteccia.',
+      curiosita: 'Non scava tane, ma riposa nascosta nell\'erba alta.',
+      rarita: 'Comune',
+      coloreRarita: Colors.green,
+      percorsoFoto: 'assets/images/Lepre.jpeg',
+    ),
   ];
 
   String testoRicerca = '';
   String categoriaSelezionata = 'Tutti';
 
-  // Funzione che apre la fotocamera/galleria nativa del browser/smartphone
   void scattaEAnalizzaFoto() {
     html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
     uploadInput.accept = 'image/*';
-    uploadInput.setAttribute('capture', 'environment'); // Apre direttamente la fotocamera posteriore su smartphone
+    uploadInput.setAttribute('capture', 'environment');
     uploadInput.click();
 
     uploadInput.onChange.listen((e) {
       final files = uploadInput.files;
       if (files!.isNotEmpty) {
-        // Mostra il caricamento e simula l'analisi dell'impronta
         showDialog(
           context: context,
           barrierDismissible: false,
@@ -175,9 +235,8 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
 
         Future.delayed(const Duration(seconds: 2), () {
           if (!mounted) return;
-          Navigator.pop(context); // Chiude il loader
-          // Per ora mostra la scheda del Lupo come risultato dell'analisi
-          mostraDettaglioAnimale(context, tuttiGliAnimali[1]); 
+          Navigator.pop(context);
+          mostraDettaglioAnimale(context, tuttiGliAnimali[1]);
         });
       }
     });
@@ -333,7 +392,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
-                        onPressed: scattaEAnalizzaFoto, // ORA APRE LA FOTOCAMERA/GALLERIA DEL DISPOSITIVO!
+                        onPressed: scattaEAnalizzaFoto,
                         child: const Text(
                           'SCATTA E RICONOSCI',
                           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white),
@@ -349,7 +408,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
             TextField(
               onChanged: (valore) => setState(() => testoRicerca = valore),
               decoration: InputDecoration(
-                hintText: 'Cerca (es. Volpe, Stambecco, Tasso)...',
+                hintText: 'Cerca (es. Volpe, Camoscio, Tasso)...',
                 prefixIcon: const Icon(Icons.search, color: Colors.green),
                 filled: true,
                 fillColor: Colors.white,
