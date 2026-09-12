@@ -85565,7 +85565,7 @@ m=t.E
 n=A.awH(new A.cM(B.DX,A.MV(A.c([new A.I5(B.EN,B.mE,25,o),B.Oa,A.Jz(A.axk(B.Tr,p.gY8(),A.axl(o,o,B.kp,o,o,o,o,o,o,o,o,o,B.DR,o,new A.cr(A.hz(12),B.q),o,o,o,o,o)))],m),B.b1,B.cj),o),3,o,new A.cr(n,B.q))
 s=A.axW(o,new A.hL(4,A.hz(15),B.q),o,o,o,o,o,o,!0,o,o,o,o,o,o,B.k,!0,o,o,o,o,o,o,o,o,o,o,o,o,o,o,"Cerca (es. Volpe, Camoscio, Tasso)...",o,o,o,o,o,o,o,o,o,!0,!0,!1,o,B.EH,o,o,o,o,o,o,o,o,o,o,o,o)
 r=t.Jm
-r=A.a5(new A.af(A.c(["Tutti","Erbivori","Predatori","Piccoli Mammiferi"],t.s),new A.aoL(p),r),r.i("aG.E"))
+r=A.a5(new A.af(A.c(["Tutti","Erbivori","Predatori","Piccoli Mammiferi","Anfibi","Rettili"],t.s),new A.aoL(p),r),r.i("aG.E"))
 r=A.aL6(A.MV(r,B.b1,B.cj),B.b0)
 q=l.length
 return new A.AE(new A.wv(B.Tq,B.iX,new A.U3(o,o,1/0,56),o),new A.cM(B.DY,A.Iu(A.c([n,B.hT,new A.BJ(s,B.P3,B.Og,B.Oh,new A.aoM(p),!0,o),B.l6,r,B.hT,A.Jz(new A.yZ(new A.aeo(new A.aoN(p,l),q,!0,!0,!0,o),o,B.aI,!1,o,o,B.lK,!1,o,o,q,B.aK,o,o,B.a_,B.aD,o))],m),B.b1,B.bu,B.cj),o),B.C1,o)}}

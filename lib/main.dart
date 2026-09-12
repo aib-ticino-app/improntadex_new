@@ -343,7 +343,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
         Future.delayed(const Duration(seconds: 2), () {
           if (!mounted) return;
           Navigator.pop(context);
-          mostraDettaglioAnimale(context, tuttiGliAnimali[0]); // Mostra la Volpe come esempio di risultato
+          mostraDettaglioAnimale(context, tuttiGliAnimali[0]);
         });
       }
     });
@@ -527,7 +527,7 @@ class _SchermataPrincipaleState extends State<SchermataPrincipale> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: ['Tutti', 'Erbivori', 'Predatori', 'Piccoli Mammiferi'].map((cat) {
+                children: ['Tutti', 'Erbivori', 'Predatori', 'Piccoli Mammiferi', 'Anfibi', 'Rettili'].map((cat) {
                   final eSelezionata = categoriaSelezionata == cat;
                   return Padding(
                     padding: const EdgeInsets.only(right: 8.0),
